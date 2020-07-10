@@ -70,7 +70,7 @@ update(req, res){
   const id = req.params.id;
 
   Tutorial.update(req.body, {
-    where: { product_id: id }
+    where: { id: id }
   })
     .then(num => {
       if (num == 1) {

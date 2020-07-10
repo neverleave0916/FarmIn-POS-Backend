@@ -4,7 +4,6 @@ module.exports = {
   PASSWORD: "Neverleave0920.",
   DB: "test",
   dialect: "mariadb",
-  logQueryParameters: true,
   port:3307,
   pool: {
     max: 5,

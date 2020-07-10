@@ -23,13 +23,13 @@ const db = require("./app/models");
 
 db.sequelize.sync();
 // // drop the table if it already exists
- /*db.sequelize.sync({ force: true }).then(() => {
-   console.log("Drop and re-sync db.");
- });*/
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 // 路由
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to this application." });
 });
 
 //require("./app/routes/api/turorials")(app);
