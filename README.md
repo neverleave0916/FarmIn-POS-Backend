@@ -1,6 +1,5 @@
 # FarmIn-POS-Backend
 
-This is a cross platform shoppinglist desktop application built on electron
 
 ### Version
 0.1.0
