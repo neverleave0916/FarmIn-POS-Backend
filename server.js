@@ -21,11 +21,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
-//db.sequelize.sync();
+db.sequelize.sync();
 // // drop the table if it already exists
- db.sequelize.sync({ force: true }).then(() => {
+ /*db.sequelize.sync({ force: true }).then(() => {
    console.log("Drop and re-sync db.");
- });
+ });*/
 
 // 路由
 app.get("/", (req, res) => {

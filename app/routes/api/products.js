@@ -27,9 +27,9 @@ const productController = require('../../controllers/product.controller.js');
   router.get("/:id", productController.findOne);
 
 
+  router.put('/:id', productController.update);
 
-
-
+  router.delete('/:id', productController.delete);
 
 
 
