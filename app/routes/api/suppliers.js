@@ -9,10 +9,9 @@ const supplierController = require('../../controllers/supplier.controller.js');
   router.get("/", supplierController.findAll);
 
   router.get("/:id", supplierController.findOne);
-  // Retrieve all published Tutorials
-  //router.get("/published", tutorials.findAllPublished);
 
-  // Retrieve a single Tutorial with id
-//   router.get("/:id", productController.findOne);
+  router.put('/:id', supplierController.update);
+
+  router.delete('/:id', supplierController.delete);
 
 module.exports = router;

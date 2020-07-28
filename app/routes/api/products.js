@@ -20,6 +20,8 @@ const productController = require('../../controllers/product.controller.js');
   // Retrieve all Tutorials
   router.get("/", productController.findAll);
 
+  router.get("/:type", productController.findType);
+
   // Retrieve all published Tutorials
   //router.get("/published", tutorials.findAllPublished);
 

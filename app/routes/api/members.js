@@ -9,10 +9,9 @@ const memberController = require('../../controllers/member.controller.js');
   router.get("/", memberController.findAll);
 
   router.get("/:id", memberController.findOne);
-  // Retrieve all published Tutorials
-  //router.get("/published", tutorials.findAllPublished);
 
-  // Retrieve a single Tutorial with id
-//   router.get("/:id", productController.findOne);
+  router.put('/:id', memberController.update);
+
+  router.delete('/:id', memberController.delete);
 
 module.exports = router;

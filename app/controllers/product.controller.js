@@ -19,28 +19,7 @@ const productController = {
           message: "Content can not be empty!"
         });
         return;
-      }
-      /*
-      const product =   {
-            "product_id": req.body.product_id,
-            "product_category_id": req.body.product_category_id,
-            "publish_status_id": req.body.publish_status_id,
-            "product_name": req.body.product_name,
-            "product_unit": req.body.product_unit,
-            "product_unit_price": req.body.product_unit_price,
-            "product_inventory": req.body.product_inventory,
-            "product_description": req.body.product_description,
-            "product_growth_period": req.body.product_growth_period,
-            "product_exp": req.body.product_exp,
-            "product_default_reserve_amount": req.body.product_default_reserve_amount,
-            "product_actual_reserve_amount": req.body.product_actual_reserve_amount,
-            "product_online_unit": req.body.product_online_unit,
-            "product_online_unit_price": req.body.product_online_unit_price,
-            "product_online_inventory": req.body.product_online_inventory,
-            "product_online_inventory_limit": req.body.product_online_inventory_linit
-      };*/
-    
-    
+      }      
       // Save Tutorial in the database
       Product.create(req.body)
         .then(data => {
@@ -58,8 +37,16 @@ const productController = {
     findAll(req, res) {
       const title = req.query.product_id;
       var condition = title ? { product_id: { [Op.like]: `%${title}%` } } : null;
-    
+
       Product.findAll({ where: condition })
+        .then(data => {
+          res.send(data);
+        }); 
+    },
+
+    findType(req, res) {
+      const { type } = req.params;
+      Product.findAll({ where: { product_category_id: type} })
         .then(data => {
           res.send(data);
         }); 
@@ -82,7 +69,7 @@ const productController = {
     
   update(req, res){
     const id = req.params.id;
-  
+
     Product.update(req.body, {
       where: { product_id: id }
     })
