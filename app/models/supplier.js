@@ -1,22 +1,34 @@
-module.exports = (sequelize, Sequelize) => {
-  const Supplier = sequelize.define("supplier", {
-    "supplier_id": {
-      type: Sequelize.CHAR(5),
-      primaryKey: true
-    },
-    "supplier_name": {
-      type: Sequelize.STRING(50),
-    },
-    "supplier_phone": {
-      type: Sequelize.CHAR(15),
-    },
-    "supplier_address": {
-      type: Sequelize.STRING(100),
-    },
-    "supplier_disc": {
-      type: Sequelize.STRING(256),
-    }
-  });
+/* jshint indent: 2 */
 
-  return Supplier;
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('supplier', {
+    'supplier_id': {
+      type: DataTypes.CHAR(5),
+      allowNull: false,
+      primaryKey: true,
+      comment: "null"
+    },
+    'supplier_name': {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      comment: "null"
+    },
+    'supplier_phone': {
+      type: DataTypes.CHAR(15),
+      allowNull: false,
+      comment: "null"
+    },
+    'supplier_address': {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      comment: "null"
+    },
+    'supplier_desc': {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+      comment: "null"
+    }
+  }, {
+    tableName: 'supplier'
+  });
 };
