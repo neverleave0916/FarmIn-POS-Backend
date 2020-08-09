@@ -18,7 +18,7 @@ const supplierController = {
         "supplier_name": req.body.supplier_name,
         "supplier_phone": req.body.supplier_phone,
         "supplier_address": req.body.supplier_address,
-        "supplier_disc": req.body.supplier_disc,
+        "supplier_disc": req.body.supplier_description,
       };
     
       // Save Tutorial in the database
@@ -56,57 +56,6 @@ const supplierController = {
         .catch(err => {
           res.status(500).send({
             message: "Error retrieving Tutorial with id=" + id
-          });
-        });
-    },
-
-    update(req, res){
-      const id = req.params.id;
-  
-      Supplier.update(req.body, {
-        where: { supplier_id: id }
-      })
-        .then(num => {
-          if (num == 1) {
-            res.send({
-              message: "會員資料更新成功"
-            });
-          } else {
-            res.send({
-              message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-            });
-          }
-        })
-        .catch(err => {
-          res.status(500).send({
-            message: "Error updating Tutorial with id=" + id
-          });
-        });
-    },
-  
-  
-  
-  
-    delete(req, res){
-      const id = req.params.id;
-    
-      Supplier.destroy({
-        where: { supplier_id: id }
-      })
-        .then(num => {
-          if (num == 1) {
-            res.send({
-              message: "Tutorial was deleted successfully!"
-            });
-          } else {
-            res.send({
-              message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
-            });
-          }
-        })
-        .catch(err => {
-          res.status(500).send({
-            message: "Could not delete Tutorial with id=" + id
           });
         });
     }

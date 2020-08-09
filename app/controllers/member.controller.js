@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 const memberController = {
 
   create(req, res){
-    console.log('111')
+
     if (!req.body.member_id) {
       res.status(400).send({
         message: "Content can not be empty!"
@@ -28,7 +28,6 @@ const memberController = {
     Member.create(member)
       .then(data => {
         res.send(data);
-        console.log('222')
       })
       .catch(err => {
         res.status(500).send({
@@ -58,58 +57,6 @@ const memberController = {
       .catch(err => {
         res.status(500).send({
           message: "Error retrieving Tutorial with id=" + id
-        });
-      });
-  },
-
-
-  update(req, res){
-    const id = req.params.id;
-
-    Member.update(req.body, {
-      where: { member_id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "會員資料更新成功"
-          });
-        } else {
-          res.send({
-            message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error updating Tutorial with id=" + id
-        });
-      });
-  },
-
-
-
-
-  delete(req, res){
-    const id = req.params.id;
-  
-    Member.destroy({
-      where: { member_id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Tutorial was deleted successfully!"
-          });
-        } else {
-          res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
         });
       });
   }
