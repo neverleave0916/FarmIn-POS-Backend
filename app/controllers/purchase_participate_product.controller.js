@@ -5,7 +5,7 @@ const purchase_participate_productController = {
 
   create(req, res){
 
-    if (!req.body.purchase_participate_product_id) {
+    if (!req.body.product_id) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -17,6 +17,7 @@ const purchase_participate_productController = {
         res.send(data);
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the Tutorial."
