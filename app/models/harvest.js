@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'user_id'
       }
     },
-    'harvest_at': {
+    'harvest_date': {
       type: DataTypes.DATE,
       allowNull: false,
       comment: "null"

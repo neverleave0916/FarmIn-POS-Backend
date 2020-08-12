@@ -1,18 +1,20 @@
 const db = require("../models"); //引入
-const Purchase_participate_product = db.purchase_participate_product;
+const Dispose = db.dispose;
 const Op = db.Sequelize.Op;
-const purchase_participate_productController = {
+const disposeController = {
 
   create(req, res){
 
-    if (!req.body.product_id) {
+    if (!req.body.dispose_id) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
 
-    Purchase_participate_product.create(req.body)
+    console.log(req.body)
+
+    Dispose.create(req.body)
       .then(data => {
         res.send(data);
       })
@@ -29,16 +31,28 @@ const purchase_participate_productController = {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
       
-    Purchase_participate_product.findAll({ where: condition })
+    Dispose.findAll({ where: condition })
       .then(data => {
         res.send(data);
-      }); 
+      });
   },
 
   findOne(req, res){
     const id = req.params.id;
-      
-    Purchase_participate_product.findByPk(id)
+
+    Dispose.findByPk(id)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id=" + id
+        });
+      });
+  },
+
+  getBigID(req, res) {
+    Dispose.findOne({ order:[['dispose_id', 'DESC']], limit:1})
       .then(data => {
         res.send(data);
       })
@@ -50,10 +64,10 @@ const purchase_participate_productController = {
   },
 
   deleteAll(req, res) {
-    Purchase_participate_product.destroy({
+    Dispose.destroy({
       where: {}
     })
   }
 }
 
-module.exports = purchase_participate_productController;
+module.exports = disposeController;

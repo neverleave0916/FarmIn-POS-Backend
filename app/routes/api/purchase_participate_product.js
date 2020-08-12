@@ -48,6 +48,6 @@ router.post('/purchase_participate_products', purchase_participate_productContro
 router.put('/purchase_participate_products/:id', purchase_participate_productController.update);
 //刪除單個產品
 router.delete('/purchase_participate_products/:id', purchase_participate_productController.remove);
-//刪除所有產品
-router.delete("/purchase_participate_products/", purchase_participate_productController.deleteAll);*/
+//刪除所有產品*/
+router.delete("/", purchase_participate_productController.deleteAll);
 module.exports = router;

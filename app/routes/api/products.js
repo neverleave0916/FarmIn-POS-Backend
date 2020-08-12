@@ -30,14 +30,7 @@ const productController = require('../../controllers/product.controller.js');
 
   router.delete('/:id', productController.delete);
 
-
-
-
-
-
-
-
-
+  router.get("/BigID/BigID", productController.getBigID);
 
 /** 
 router.get('/products', productController.all);

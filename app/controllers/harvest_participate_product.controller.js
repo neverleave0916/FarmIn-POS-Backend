@@ -1,7 +1,7 @@
 const db = require("../models"); //引入
-const Purchase_participate_product = db.purchase_participate_product;
+const Harvest_participate_product = db.harvest_participate_product;
 const Op = db.Sequelize.Op;
-const purchase_participate_productController = {
+const harvest_participate_productController = {
 
   create(req, res){
 
@@ -12,7 +12,7 @@ const purchase_participate_productController = {
       return;
     }
 
-    Purchase_participate_product.create(req.body)
+    Harvest_participate_product.create(req.body)
       .then(data => {
         res.send(data);
       })
@@ -29,7 +29,7 @@ const purchase_participate_productController = {
     const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
       
-    Purchase_participate_product.findAll({ where: condition })
+    Harvest_participate_product.findAll({ where: condition })
       .then(data => {
         res.send(data);
       }); 
@@ -38,7 +38,7 @@ const purchase_participate_productController = {
   findOne(req, res){
     const id = req.params.id;
       
-    Purchase_participate_product.findByPk(id)
+    Harvest_participate_product.findByPk(id)
       .then(data => {
         res.send(data);
       })
@@ -50,10 +50,10 @@ const purchase_participate_productController = {
   },
 
   deleteAll(req, res) {
-    Purchase_participate_product.destroy({
+    Harvest_participate_product.destroy({
       where: {}
     })
   }
 }
 
-module.exports = purchase_participate_productController;
+module.exports = harvest_participate_productController;

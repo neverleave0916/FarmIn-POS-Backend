@@ -40,13 +40,14 @@ const productController = {
             "product_online_inventory_limit": req.body.product_online_inventory_linit
       };*/
     
-    
+      console.log(req.body)
       // Save Tutorial in the database
       Product.create(req.body)
         .then(data => {
           res.send(data);
         })
         .catch(err => {
+          console.log(err)
           res.status(500).send({
             message:
               err.message || "Some error occurred while creating the Tutorial."
@@ -104,8 +105,17 @@ const productController = {
       });
   },
 
-
-
+  getBigID(req, res) {
+    Product.findOne({ order:[['product_id', 'DESC']], limit:1})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id=" + id
+        });
+      });
+  },
 
   delete(req, res){
     const id = req.params.id;
