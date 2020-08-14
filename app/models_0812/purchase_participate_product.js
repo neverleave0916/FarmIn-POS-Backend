@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'product_id'
       }
     },
-    'purchase_participate_product_unit': {
+    'purchase': {
       type: DataTypes.CHAR(5),
       allowNull: false,
       comment: "null"
