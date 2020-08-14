@@ -57,6 +57,7 @@ const harvestController = {
         res.send(data);
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message: "Error retrieving Tutorial with id=" + id
         });

@@ -32,6 +32,9 @@ const productController = require('../../controllers/product.controller.js');
 
   router.get("/BigID/BigID", productController.getBigID);
 
+  //修改單個產品
+  router.put('/products/:id', productController.update);
+
 /** 
 router.get('/products', productController.all);
 router.get('/products/:id', productController.byId);
@@ -46,8 +49,6 @@ router.get('/products', productController.findAll);
 router.get('/products/:id', productController.findOne);
 //新增單個產品
 router.post('/products', productController.create);
-//修改單個產品
-router.put('/products/:id', productController.update);
 //刪除單個產品
 router.delete('/products/:id', productController.remove);
 //刪除所有產品

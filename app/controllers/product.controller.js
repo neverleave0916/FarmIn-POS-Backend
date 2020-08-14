@@ -40,14 +40,12 @@ const productController = {
             "product_online_inventory_limit": req.body.product_online_inventory_linit
       };*/
     
-      console.log(req.body)
       // Save Tutorial in the database
       Product.create(req.body)
         .then(data => {
           res.send(data);
         })
         .catch(err => {
-          console.log(err)
           res.status(500).send({
             message:
               err.message || "Some error occurred while creating the Tutorial."
@@ -83,7 +81,7 @@ const productController = {
     
   update(req, res){
     const id = req.params.id;
-  
+    console.log(req.body)
     Product.update(req.body, {
       where: { product_id: id }
     })
@@ -99,6 +97,7 @@ const productController = {
         }
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message: "Error updating Tutorial with id=" + id
         });
