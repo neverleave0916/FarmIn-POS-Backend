@@ -22,18 +22,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
-  },
-  define:{
-    timestamps: false
-  },
-  dialectOptions: {
-    useUTC: false, //for reading from database
-    dateStrings: true,
-    typeCast: true,
-    timezone: 'Etc/GMT+8'
-  },
-  syncOnAssociation: false,
-  timezone: '+08:00' //for writing to database
+  }
 });
 
 

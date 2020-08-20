@@ -16,30 +16,10 @@ const productController = {
       // Validate request
       if (!req.body.product_id) {
         res.status(400).send({
-          message: "Content can not be empty!"
+          message: "缺少ID"
         });
         return;
       }
-      /*
-      const product =   {
-            "product_id": req.body.product_id,
-            "product_category_id": req.body.product_category_id,
-            "publish_status_id": req.body.publish_status_id,
-            "product_name": req.body.product_name,
-            "product_unit": req.body.product_unit,
-            "product_unit_price": req.body.product_unit_price,
-            "product_inventory": req.body.product_inventory,
-            "product_description": req.body.product_description,
-            "product_growth_period": req.body.product_growth_period,
-            "product_exp": req.body.product_exp,
-            "product_default_reserve_amount": req.body.product_default_reserve_amount,
-            "product_actual_reserve_amount": req.body.product_actual_reserve_amount,
-            "product_online_unit": req.body.product_online_unit,
-            "product_online_unit_price": req.body.product_online_unit_price,
-            "product_online_inventory": req.body.product_online_inventory,
-            "product_online_inventory_limit": req.body.product_online_inventory_linit
-      };*/
-    
     
       // Save Tutorial in the database
       Product.create(req.body)
@@ -55,18 +35,38 @@ const productController = {
     },
   
   
-    findAll(req, res) {
-      const title = req.query.product_id;
-      var condition = title ? { product_id: { [Op.like]: `%${title}%` } } : null;
-    
-      Product.findAll({ where: condition })
+    getAll(req, res) {
+      const pid = req.query.product_id
+      const category = req.query.product_category_id;
+      const max = req.query.maxID
+      var condition
+      if(pid == 'max'){
+        Product.findOne({ order:[['product_id', 'DESC']], limit:1})
         .then(data => {
           res.send(data);
-        }); 
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: "Error getMaxID with id=" + id
+          });
+        });
+      }
+      else{
+        if(category != null){
+          condition = category ? { product_category_id: { [Op.like]: `%${category}%` } } : null;
+        }
+        else{
+          condition = null
+        }
+        Product.findAll({ where: condition })
+          .then(data => {
+            res.send(data);
+          }); 
+      }
     },
   
     // Find a single Tutorial with an id
-  findOne(req, res){
+  getOne(req, res){
     const id = req.params.id;
   
     Product.findByPk(id)
@@ -75,14 +75,13 @@ const productController = {
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
+          message: "Error retrieving 產品 with id=" + id
         });
       });
   },
     
   update(req, res){
     const id = req.params.id;
-  
     Product.update(req.body, {
       where: { product_id: id }
     })
@@ -98,14 +97,12 @@ const productController = {
         }
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message: "Error updating Tutorial with id=" + id
         });
       });
   },
-
-
-
 
   delete(req, res){
     const id = req.params.id;
@@ -116,27 +113,21 @@ const productController = {
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Tutorial was deleted successfully!"
+            message: "產品 was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot delete 產品 with id=${id}. Maybe 產品 was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
+          message: "Could not delete 產品 with id=" + id
         });
       });
-  }
-
+  },
 
   };
-
-
-
-
-
 
 module.exports = productController;
