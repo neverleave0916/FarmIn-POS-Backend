@@ -10,22 +10,22 @@ module.exports = function(sequelize, DataTypes) {
     },
     'supplier_name': {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'supplier_phone': {
       type: DataTypes.CHAR(15),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'supplier_address': {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'supplier_desc': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

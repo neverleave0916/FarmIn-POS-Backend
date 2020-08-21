@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('harvest', {
+  let harvest=sequelize.define('harvest', {
     'harvest_id': {
       type: DataTypes.CHAR(16),
       allowNull: false,
@@ -10,19 +10,29 @@ module.exports = function(sequelize, DataTypes) {
     },
     'user_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'user',
         key: 'user_id'
       }
     },
-    'harvest_datetime': {
+    'harvest_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {
     tableName: 'harvest'
   });
+
+
+
+  // harvest.associate = function (db) {
+  //   harvest.belongsToMany(db.product, {
+  //     through: db.harvest_participate_product,
+  //     foreignKey: "harvest_id",
+  //   })
+  // };
+  return harvest;
 };

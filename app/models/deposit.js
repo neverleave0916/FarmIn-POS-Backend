@@ -5,11 +5,12 @@ module.exports = function(sequelize, DataTypes) {
     'deposit_id': {
       type: DataTypes.CHAR(15),
       allowNull: false,
+      primaryKey: true,
       comment: "null"
     },
     'member_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'member',
@@ -18,13 +19,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     'deposit_amount': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'deposit_time': {
+    'deposit_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
-      primaryKey: true,
+      allowNull: true,
       comment: "null"
     }
   }, {

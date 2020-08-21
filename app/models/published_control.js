@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'member_category_id': {
       type: DataTypes.CHAR(5),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'member_category',
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'product_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'product',
@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'published_control_save_amount': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

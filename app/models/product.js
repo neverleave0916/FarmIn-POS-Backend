@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('product', {
+  product= sequelize.define('product', {
     'product_id': {
       type: DataTypes.CHAR(6),
       allowNull: false,
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'product_category_id': {
       type: DataTypes.CHAR(5),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'product_category',
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'published_status_id': {
       type: DataTypes.CHAR(3),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'published_status',
@@ -28,70 +28,79 @@ module.exports = function(sequelize, DataTypes) {
     },
     'product_name': {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_unit': {
       type: DataTypes.CHAR(5),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_unit_price': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_inventory': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_desc': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_growth_period': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_expire': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_default_save_amount': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_actual_save_amount': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_unit': {
       type: DataTypes.CHAR(5),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_unit_price': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_inventory': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_max_inventory': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {
     tableName: 'product'
   });
+
+  // product.associate = function (db) {
+  //   product.belongsToMany(db.harvest, {
+  //     through: db.harvest_participate_product,
+  //     foreignKey: "product_id",
+  //   })
+  // };
+
+  return product;
 };

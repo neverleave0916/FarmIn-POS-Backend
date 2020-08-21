@@ -24,17 +24,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     'transaction_participate_product_unit': {
       type: DataTypes.CHAR(5),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_participate_product_amount': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_participate_product_unit_price': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

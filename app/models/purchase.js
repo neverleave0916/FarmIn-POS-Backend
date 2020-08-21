@@ -10,31 +10,31 @@ module.exports = function(sequelize, DataTypes) {
     },
     'user_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'user',
         key: 'user_id'
       }
     },
-    'purchase_date': {
+    'purchase_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'purchase_subtotal': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'purchase_discount': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'purchase_total': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

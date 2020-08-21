@@ -14,16 +14,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     'cart_status_id': {
       type: DataTypes.CHAR(4),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'cart_status',
         key: 'cart_status_id'
       }
     },
-    'cart_update_datetime': {
+    'cart_update_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

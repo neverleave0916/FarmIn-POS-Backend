@@ -12,17 +12,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     'farm_info_inage': {
       type: "LONGBLOB",
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'farm_info_desc': {
       type: DataTypes.STRING(1000),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'farm_info_update_datetime': {
+    'farm_info_update_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

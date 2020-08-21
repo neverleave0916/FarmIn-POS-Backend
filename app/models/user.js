@@ -10,17 +10,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     'user_name': {
       type: DataTypes.STRING(30),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'user_account': {
       type: DataTypes.CHAR(30),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'user_password': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

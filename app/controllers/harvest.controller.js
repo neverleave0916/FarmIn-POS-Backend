@@ -78,60 +78,108 @@ const harvestController = {
 
   },
 
-  //以下還沒看!!
+  //取得所有採收紀錄(含產品)，或單筆紀錄用/?harvest_id=HARR202008200001
   getAll(req, res) {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    var responseData = null;
+    
+    const title = req.query.harvest_id;
+    //const title = 'HARR202008170003';
+    var condition = title ? { harvest_id: { [Op.like]: `%${title}%` } } : null;
       
-    Harvest.findAll({ where: condition })
-      .then(data => {
-        responseData = data
+    Harvest.findAll({
+      //include: [{model:Harvest_product}],
+      //include: [db.harvest_participate_product]
+      include: [{
+        all: true
+      }],
+      where: condition
+    })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error getAll"
       });
-    Harvest_product.findAll({ where: condition })
-      .then(data => {
-        responseData.push(data)
-        res.send(responseData)
-      }); 
+    });
+
   },
 
+  //取得單筆採收紀錄(含產品)，/HARR202008200001
   getOne(req, res){
     const id = req.params.id;
-    var responseData = null;
-
-    Harvest.findByPk(id)
-      .then(data => {
-        responseData = data
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error getOne with id=" + id
-        });
+    
+    Harvest.findByPk(id,{
+      //include: [{model:Harvest_product}],
+      include: [db.product]
+      // include: [{
+      //   all: true
+      // }]
+    })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error getOne with id=" + id
       });
-
-    Harvest_product.findByPk(id)
-      .then(data => {
-        responseData.push(data)
-        res.send(responseData)
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error getOne with id=" + id
-        });
-      });
+    });
   },
 
   getMaxID(req, res) {
-    Harvest.findOne({ order:[['harvest_id', 'DESC']], limit:1})
-      .then(data => {
-        res.send(data);
+    Harvest.max('harvest_id')
+    .then(data => {
+      res.send(data);})
+    .catch(err => {
+      res.status(500).send({
+        message: "Error getMaxID"
+      });
+    });
+  },
+
+  update(req, res){
+
+
+    const id = req.params.id;
+
+
+    Harvest.findByPk(id,{
+      include: [db.product]
+    })
+    .then(data => {
+      data.update(req.body, {
+        where: { harvest_id: req.body.harvest_id }
+      });
+
+      data.setProducts([],).then(num=>{        
+          for(let key in req.body.products){
+            let vamount = req.body.products[key].amount
+            let pd = req.body.products[key].product_id
+            data.addProducts([pd],{ through:{harvest_participate_product_amount:vamount} });
+          }
+  
+          if(num>=1){
+            res.send({
+              message: "產品更新成功"
+            });
+          }else{
+            res.send({
+              message: `Cannot update 採收紀錄`
+            });
+          }
+          
       })
       .catch(err => {
-        console.log(err)
         res.status(500).send({
-          message: "Error getMaxID with id=" + id
+          message: "Error getOne with id=" + id
         });
       });
+
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error getOne with id=" + id
+      });
+    });
   },
 
   deleteAll(req, res) {
@@ -145,3 +193,32 @@ const harvestController = {
 }
 
 module.exports = harvestController;
+
+
+
+
+
+
+
+
+
+
+//用採收ID取得所有採收產品
+// const id = req.params.id;
+    
+// Harvest.findByPk(id,{
+//   include: [db.product]
+// })
+// .then(data => {
+//   data.getProducts().then(data2 => {
+//     res.send(data2);
+//   })
+// })
+
+//列出所有自動產生的方法
+// const model = db.harvest;
+// for (let assoc of Object.keys(model.associations)) {
+//   for (let accessor of Object.keys(model.associations[assoc].accessors)) {
+//     console.log(model.name + '.' + model.associations[assoc].accessors[accessor]+'()');
+//   }
+// }

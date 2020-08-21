@@ -12,12 +12,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     'news_artical': {
       type: DataTypes.STRING(10000),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'news_update_datetime': {
+    'news_update_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

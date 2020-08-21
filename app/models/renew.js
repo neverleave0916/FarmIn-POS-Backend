@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'member_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'member',
@@ -19,26 +19,26 @@ module.exports = function(sequelize, DataTypes) {
     },
     'transaction_id': {
       type: DataTypes.CHAR(15),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'transaction',
         key: 'transaction_id'
       }
     },
-    'renew_start_date': {
+    'renew_start_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'renew_end_date': {
+    'renew_end_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'renew_cycle': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

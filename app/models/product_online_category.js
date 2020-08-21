@@ -10,22 +10,22 @@ module.exports = function(sequelize, DataTypes) {
     },
     'product_online_category_title': {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_category_desc': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_category_img': {
       type: "LONGBLOB",
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_category_sort': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'product_online_category_parent': {

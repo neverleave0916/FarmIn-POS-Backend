@@ -14,21 +14,20 @@ const harvestController = require('../../controllers/harvest.controller.js');
  * @apiSuccess {String} lastname  Lastname of the User.
  */
 
-  // 新增 Tutorial
-  router.post("/", harvestController.create);
+//新增 採收紀錄
+router.post("/", harvestController.create);
 
-  // Retrieve all Tutorials
-  //router.get("/", harvestController.findAll);
+//取得 所有採收紀錄(含產品)
+router.get("/", harvestController.getAll);
 
-  // Retrieve all published Tutorials
-  //router.get("/published", tutorials.findAllPublished);
+//取得 單一採收紀錄(含產品)
+router.get("/:id", harvestController.getOne);
 
-  // Retrieve a single Tutorial with id
-  //router.get("/:id", harvestController.findOne);
+//取得 最大ID
+router.get("/max", harvestController.getMaxID);
 
-  //router.get("/BigID/BigID", harvestController.getBigID);
-
-  // router.put('/:id', harvestController.update);
+//更新 採收紀錄(含產品)
+router.put('/:id', harvestController.update);
 
   // router.delete('/:id', harvestController.delete);
 

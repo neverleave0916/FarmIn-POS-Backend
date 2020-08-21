@@ -63,15 +63,24 @@ fs
   /** 類陣列物件-隨機下標
       var anObj = { 100: 'a', 2: 'b', 7: 'c' };
       console.log(Object.keys(anObj)); // console: ['2', '7', '100']
-  
+  */
   Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
       db[modelName].associate(db);
     }
-  });*/
+  });
 
 
-
+  db.harvest.belongsToMany(db.product, {
+    through: db.harvest_participate_product,
+    foreignKey: "harvest_id",
+    //as:'Product',
+  });
+  db.product.belongsToMany(db.harvest, {
+    through: db.harvest_participate_product,
+    foreignKey: "product_id",
+    //as:'Harvest',
+  });
 
 
   db.Sequelize = Sequelize;
