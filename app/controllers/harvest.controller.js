@@ -136,11 +136,31 @@ const harvestController = {
     });
   },
 
+
+
+
+//   {
+//     "harvest_id": "HARR202008200001", //用不到
+//     "user_id": "ADM001",
+//     "harvest_dt": "2020-01-25 16:00:00",
+//     "products": [
+//         {
+//             "product_id": "PD0001",
+//             "amount": 50
+//         },
+//         {
+//             "product_id": "PD0003",
+//             "amount": 20
+//         },
+//         {
+//             "product_id": "PD0004",
+//             "amount": 20
+//         }
+//     ]
+// }
+//更新採收紀錄(含產品)
   update(req, res){
-
-
     const id = req.params.id;
-
 
     Harvest.findByPk(id,{
       include: [db.product]
