@@ -29,7 +29,7 @@ router.get("/max", harvestController.getMaxID);
 //更新 採收紀錄(含產品)
 router.put('/:id', harvestController.update);
 
-  // router.delete('/:id', harvestController.delete);
+router.delete('/:id', harvestController.delete);
 
 /** 
 router.get('/harvests', harvestController.all);
@@ -50,5 +50,5 @@ router.put('/harvests/:id', harvestController.update);
 //刪除單個產品
 router.delete('/harvests/:id', harvestController.remove);
 //刪除所有產品*/
-router.delete("/", harvestController.deleteAll);
+//router.delete("/", harvestController.deleteAll);
 module.exports = router;

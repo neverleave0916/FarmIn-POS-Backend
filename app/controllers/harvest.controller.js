@@ -202,16 +202,47 @@ const harvestController = {
     });
   },
 
-  deleteAll(req, res) {
-    Harvest_product.destroy({
-      where: {}
+  //刪除單一筆紀錄(含產品)
+  //http://127.0.0.1:8080/api/harvests/HARR202008200001
+  delete(req, res){
+    const id = req.params.id;
+    Harvest.findByPk(id,{
+      include: [db.product]
     })
-    Harvest.destroy({
-      where: {}
-    })
-  }
-}
+    .then(data => {
+      data.setProducts([],)
+      .then(pd=>{
+        data.destroy()
+        .then(num=>{
+          if(num){
+            res.send({
+              message: "刪除成功"
+            });
+          }else{
+            res.status(500).send({
+              message: `Cannot delete 採收紀錄 with id=${id}. Maybe 採收紀錄 was not found!`
+            });
+          };
+        });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: `Cannot delete 採收紀錄 with id=${id}. Maybe 採收紀錄 was not found!`
+        });
+      });
 
+      
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: `Cannot delete 採收紀錄 with id=${id}. Maybe 採收紀錄 was not found!`
+      });
+    });
+  },
+
+
+
+}
 module.exports = harvestController;
 
 
