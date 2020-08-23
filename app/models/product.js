@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  product= sequelize.define('product', {
+  return sequelize.define('product', {
     'product_id': {
       type: DataTypes.CHAR(6),
       allowNull: false,
@@ -94,13 +94,4 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     tableName: 'product'
   });
-
-  // product.associate = function (db) {
-  //   product.belongsToMany(db.harvest, {
-  //     through: db.harvest_participate_product,
-  //     foreignKey: "product_id",
-  //   })
-  // };
-
-  return product;
 };

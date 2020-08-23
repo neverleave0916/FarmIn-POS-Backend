@@ -421,10 +421,13 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_account`, `user_password`) VAL
 ('ADM001', 'User01', 'Thenewestuser', 'Thenewestuser');
 
 INSERT INTO `harvest` (`harvest_id`, `user_id`, `harvest_dt`) VALUES
-('HARR202008080000', 'ADM001', '2020-08-17 15:11:06');
+('HARR202008200000', 'ADM001', '2020-08-17 15:11:06');
 
 INSERT INTO `harvest_participate_product` (`harvest_id`, `product_id`, `harvest_participate_product_amount`) VALUES
-('HARR202008080000', 'PD0003', 30),
-('HARR202008080000', 'PD0004', 20),
-('HARR202008080000', 'PD0005', 10),
-('HARR202008080000', 'PD0006', 20);
+('HARR202008200000', 'PD0003', 30),
+('HARR202008200000', 'PD0004', 20),
+('HARR202008200000', 'PD0005', 10),
+('HARR202008200000', 'PD0006', 20);
+
+INSERT INTO `member` (`member_id`, `member_card_id`, `member_name`, `member_gender`, `member_birthday`, `member_phone`, `memebr_email`, `member_address`, `member_balance`, `member_remark`) VALUES
+('M10001', '1234567890', '蔣昆興', 1, '1999-01-11', '0932018375', 'neverleave0916@gmail.com', '台北市內湖區文德路101巷2號5樓', 1000, NULL);

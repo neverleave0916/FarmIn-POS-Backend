@@ -126,7 +126,9 @@ const harvestController = {
   },
 
   getMaxID(req, res) {
-    Harvest.max('harvest_id')
+    Harvest.max('harvest_id',{
+      paranoid: false
+    })
     .then(data => {
       res.send(data);})
     .catch(err => {
