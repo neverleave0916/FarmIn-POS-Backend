@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -75,7 +74,7 @@ fs
     }
   });
 
-
+  //採收
   db.harvest.belongsToMany(db.product, {
     through: db.harvest_participate_product,
     foreignKey: "harvest_id",
@@ -86,6 +85,40 @@ fs
     foreignKey: "product_id",
     //as:'Harvest',
   });
+
+  //交易
+  db.transaction.belongsTo(db.transaction_src,{
+    through: db.transaction_src,
+    foreignKey: "transaction_src_id"
+  });
+  db.transaction.belongsTo(db.transaction_status,{
+    through: db.transaction_status,
+    foreignKey: "transaction_status_id"
+  });
+  db.transaction.belongsTo(db.member,{
+    through: db.member,
+    foreignKey: "member_id"
+  });
+  db.transaction.belongsTo(db.payment_type,{
+    through: db.payment_type,
+    foreignKey: "payment_type_id"
+  });
+  db.transaction.belongsToMany(db.product, {
+    through: db.transaction_participate_product,
+    foreignKey: "transaction_id",
+    //as:'Product',
+  });
+  db.product.belongsToMany(db.transaction, {
+    through: db.transaction_participate_product,
+    foreignKey: "product_id",
+    //as:'Harvest',
+  });
+
+
+
+
+
+
 
 
   db.Sequelize = Sequelize;

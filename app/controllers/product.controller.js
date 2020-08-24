@@ -38,20 +38,19 @@ const productController = {
     getAll(req, res) {
       const pid = req.query.product_id
       const category = req.query.product_category_id;
-      const max = req.query.maxID
       var condition
-      if(pid == 'max'){
-        Product.findOne({ order:[['product_id', 'DESC']], limit:1})
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message: "Error getMaxID with id=" + id
-          });
-        });
-      }
-      else{
+      // if(pid == 'max'){
+      //   Product.findOne({ order:[['product_id', 'DESC']], limit:1})
+      //   .then(data => {
+      //     res.send(data);
+      //   })
+      //   .catch(err => {
+      //     res.status(500).send({
+      //       message: "Error getMaxID with id=" + id
+      //     });
+      //   });
+      // }
+      // else{
         if(category != null){
           condition = category ? { product_category_id: { [Op.like]: `%${category}%` } } : null;
         }
@@ -62,9 +61,25 @@ const productController = {
           .then(data => {
             res.send(data);
           }); 
-      }
+      //}
     },
   
+
+
+    getMaxID(req, res) {
+      Product.max('product_id',{
+        paranoid: false
+      })
+      .then(data => {
+        res.send(data);})
+      .catch(err => {
+        res.status(500).send({
+          message: "Error getMaxID"
+        });
+      });
+    },
+
+
     // Find a single Tutorial with an id
   getOne(req, res){
     const id = req.params.id;
@@ -116,7 +131,7 @@ const productController = {
             message: "產品 was deleted successfully!"
           });
         } else {
-          res.send({
+          res.status(500).send({
             message: `Cannot delete 產品 with id=${id}. Maybe 產品 was not found!`
           });
         }

@@ -172,22 +172,24 @@ const harvestController = {
         where: { harvest_id: req.body.harvest_id }
       });
 
-      data.setProducts([],).then(num=>{        
+      data.setProducts([],{
+        force: true
+      }).then(num=>{        
           for(let key in req.body.products){
             let vamount = req.body.products[key].amount
             let pd = req.body.products[key].product_id
             data.addProducts([pd],{ through:{harvest_participate_product_amount:vamount} });
           }
   
-          if(num>=1){
+          // if(num>=1){
             res.send({
               message: "產品更新成功"
             });
-          }else{
-            res.send({
-              message: `Cannot update 採收紀錄`
-            });
-          }
+          // }else{
+          //   res.status(500).send({
+          //     message: `Cannot update 採收紀錄`
+          //   });
+          // }
           
       })
       .catch(err => {

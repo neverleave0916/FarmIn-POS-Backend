@@ -14,19 +14,22 @@ const productController = require('../../controllers/product.controller.js');
  * @apiSuccess {String} lastname  Lastname of the User.
  */
 
-  // 新增產品
-  router.post("/", productController.create);
+//新增產品
+router.post("/", productController.create);
 
-  // 取得所有產品 //取得特定產品 特定種類產品
-  router.get("/", productController.getAll);
+//取得所有產品 //取得特定產品 特定種類產品
+router.get("/", productController.getAll);
 
-  // 取得特定產品 with id
-  router.get("/:id", productController.getOne);
+//取得 最大ID
+router.get("/max", productController.getMaxID);
 
-  // 更新產品By ID
-  router.put('/:id', productController.update);
+//取得特定產品 with id
+router.get("/:id", productController.getOne);
 
-  // 刪除產品
-  router.delete('/:id', productController.delete);
+//更新產品By ID
+router.put('/:id', productController.update);
+
+//刪除產品
+router.delete('/:id', productController.delete);
 
 module.exports = router;

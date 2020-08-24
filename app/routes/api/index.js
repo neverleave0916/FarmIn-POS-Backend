@@ -2,6 +2,15 @@ const apiRouter = require('express').Router();
 
 const productsRouter = require('./products');
 const product_categoryRouter = require('./product_categories');
+const harvestRouter = require('./harvests');
+const transactionRouter = require('./transactions')
+
+
+
+apiRouter.use('/products',productsRouter);
+apiRouter.use('/product_categories',product_categoryRouter);
+apiRouter.use('/harvests',harvestRouter);
+apiRouter.use('/transactions',transactionRouter);
 // const published_statusRouter = require('./published_status');
 
 // const turorialRouter = require('./turorials');
@@ -13,7 +22,7 @@ const product_categoryRouter = require('./product_categories');
 
 // const userRouter = require('./user');
 
-const harvestRouter = require('./harvests');
+
 // const harvest_p_productRouter = require('./harvest_participate_product');
 
 // const adjustRouter = require('./adjust');
@@ -27,8 +36,7 @@ const harvestRouter = require('./harvests');
 //router.use('/turorials',turorials);
 
 
-apiRouter.use('/products',productsRouter);
-apiRouter.use('/product_categories',product_categoryRouter);
+
 // apiRouter.use('/published_status',published_statusRouter);
 
 // apiRouter.use('/members',memberRouter);
@@ -37,7 +45,7 @@ apiRouter.use('/product_categories',product_categoryRouter);
 // apiRouter.use('/purchases',purchaseRouter);
 // apiRouter.use('/purchase_p_products',purchase_p_productRouter);
 
-apiRouter.use('/harvests',harvestRouter);
+
 // apiRouter.use('/harvest_p_products',harvest_p_productRouter);
 
 // apiRouter.use('/disposes',disposeRouter);
