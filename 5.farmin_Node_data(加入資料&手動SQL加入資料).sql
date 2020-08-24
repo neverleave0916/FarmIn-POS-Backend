@@ -1120,7 +1120,13 @@ VALUES
 ('TX2020082000001', 'PD0002', '包', '2', '40', NULL);
 
 
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `supplier_phone`, `supplier_address`, `supplier_desc`, `deleted_at`) 
+VALUES 
+('S0001', '綠盈牧場', '0925704972', '臺南市楠西區同心一路851號', '無', NULL), 
+('S0002', '建成牧場', '0936545415', '花蓮縣富里鄉忠明七街682號', NULL, NULL);
 
+INSERT INTO `supplier_participate_product` (`supplier_id`, `product_id`, `supplier_participate_product_amount`, `deleted_at`) 
+VALUES ('S0001', 'PD0001', '100', NULL), ('S0001', 'PD0002', '50', NULL);
 
 
 

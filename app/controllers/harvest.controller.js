@@ -244,8 +244,6 @@ const harvestController = {
     });
   },
 
-
-
 }
 module.exports = harvestController;
 

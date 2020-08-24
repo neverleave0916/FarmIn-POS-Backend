@@ -2,17 +2,25 @@ const express = require('express');
 const router = express.Router();
 const transactionController = require('../../controllers/transaction.controller.js');
 
-/**
- * @api {get} /harvests/:id Request Product information
- * @apiName GetUser
- * @apiGroup 產品
- * 
- * @apiParam {String} id Users unique ID.
- * @apiParam {String} group unique ID.
- * 
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- */
+router.post("/", transactionController.create);
+
+//取得 所有交易紀錄(含產品)
+router.get("/", transactionController.getAll);
+
+//取得 最大ID
+router.get("/max", transactionController.getMaxID);
+
+//取得 單一交易紀錄(含產品)
+router.get("/:id", transactionController.getOne);
+
+//更新 交易紀錄(含產品)
+router.put('/:id', transactionController.update);
+
+//刪除 交易紀錄(含產品)
+router.delete('/:id', transactionController.delete);
+
+module.exports = router;
+
 
 //新增 更新 交易紀錄(含產品)
 // {
@@ -44,21 +52,3 @@ const transactionController = require('../../controllers/transaction.controller.
 //         }
 //     ]
 // }
-router.post("/", transactionController.create);
-
-//取得 所有交易紀錄(含產品)
-router.get("/", transactionController.getAll);
-
-//取得 最大ID
-router.get("/max", transactionController.getMaxID);
-
-//取得 單一交易紀錄(含產品)
-router.get("/:id", transactionController.getOne);
-
-//更新 採收紀錄(含產品)
-router.put('/:id', transactionController.update);
-
-//刪除 交易紀錄(含產品)
-router.delete('/:id', transactionController.delete);
-
-module.exports = router;

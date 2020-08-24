@@ -1,16 +1,45 @@
 const apiRouter = require('express').Router();
+const fs = require('fs');
+const path = require('path');
+const basename = path.basename(__filename);
 
-const productsRouter = require('./products');
-const product_categoryRouter = require('./product_categories');
-const harvestRouter = require('./harvests');
-const transactionRouter = require('./transactions')
+//放在此目錄下的檔案將會自動import
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file));
+    const name = '/'+path.parse(file).name
+    apiRouter.use(name,model);
+  });
 
 
 
-apiRouter.use('/products',productsRouter);
-apiRouter.use('/product_categories',product_categoryRouter);
-apiRouter.use('/harvests',harvestRouter);
-apiRouter.use('/transactions',transactionRouter);
+
+  
+// const productsRouter = require('./products');
+// const product_categoryRouter = require('./product_categories');
+// const harvestRouter = require('./harvests');
+// const transactionRouter = require('./transactions')
+// const supplierRouter = require('./suppliers')
+
+
+// apiRouter.use('/products',productsRouter);
+// apiRouter.use('/product_categories',product_categoryRouter);
+// apiRouter.use('/harvests',harvestRouter);
+// apiRouter.use('/transactions',transactionRouter);
+// apiRouter.use('/suppliers',supplierRouter);
+
+
+
+
+
+
+
+  //apiRouter.use('/products',require('./products'));
+
 // const published_statusRouter = require('./published_status');
 
 // const turorialRouter = require('./turorials');

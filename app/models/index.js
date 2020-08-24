@@ -13,7 +13,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   port: dbConfig.port,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
+  operatorsAliases: 0,
 
   logQueryParameters: true,
   pool: {
@@ -78,12 +78,10 @@ fs
   db.harvest.belongsToMany(db.product, {
     through: db.harvest_participate_product,
     foreignKey: "harvest_id",
-    //as:'Product',
   });
   db.product.belongsToMany(db.harvest, {
     through: db.harvest_participate_product,
     foreignKey: "product_id",
-    //as:'Harvest',
   });
 
   //交易
@@ -106,14 +104,23 @@ fs
   db.transaction.belongsToMany(db.product, {
     through: db.transaction_participate_product,
     foreignKey: "transaction_id",
-    //as:'Product',
   });
   db.product.belongsToMany(db.transaction, {
     through: db.transaction_participate_product,
     foreignKey: "product_id",
-    //as:'Harvest',
   });
 
+
+
+    //採收
+    db.supplier.belongsToMany(db.product, {
+      through: db.supplier_participate_product,
+      foreignKey: "supplier_id",
+    });
+    db.product.belongsToMany(db.supplier, {
+      through: db.supplier_participate_product,
+      foreignKey: "product_id",
+    });
 
 
 
