@@ -10,48 +10,48 @@ module.exports = function(sequelize, DataTypes) {
     },
     'member_card_id': {
       type: DataTypes.CHAR(10),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       unique: true
     },
     'member_name': {
       type: DataTypes.STRING(30),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_gender': {
       type: DataTypes.INTEGER(1),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_birthday': {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_phone': {
       type: DataTypes.CHAR(15),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'member_email': {
+    'memebr_email': {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_address': {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_balance': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_remark': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

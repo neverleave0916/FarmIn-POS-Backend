@@ -14,43 +14,22 @@ const productController = require('../../controllers/product.controller.js');
  * @apiSuccess {String} lastname  Lastname of the User.
  */
 
-  // 新增 Tutorial
-  router.post("/", productController.create);
+//新增產品
+router.post("/", productController.create);
 
-  // Retrieve all Tutorials
-  router.get("/", productController.findAll);
+//取得所有產品 //取得特定產品 特定種類產品
+router.get("/", productController.getAll);
 
-  // Retrieve all published Tutorials
-  //router.get("/published", tutorials.findAllPublished);
+//取得 最大ID
+router.get("/max", productController.getMaxID);
 
-  // Retrieve a single Tutorial with id
-  router.get("/:id", productController.findOne);
+//取得特定產品 with id
+router.get("/:id", productController.getOne);
 
-  router.put('/:id', productController.update);
+//更新產品By ID
+router.put('/:id', productController.update);
 
-  router.delete('/:id', productController.delete);
+//刪除產品
+router.delete('/:id', productController.delete);
 
-  router.get("/BigID/BigID", productController.getBigID);
-
-  //修改單個產品
-  router.put('/products/:id', productController.update);
-
-/** 
-router.get('/products', productController.all);
-router.get('/products/:id', productController.byId);
-router.post('/products', productController.create);
-router.put('/products/:id', productController.update);
-router.delete('/products/:id', productController.remove);
-*/
-//獲取所有產品
-/** 
-router.get('/products', productController.findAll);
-//獲取單個產品 :id代表動態路由，用於匹配任意string
-router.get('/products/:id', productController.findOne);
-//新增單個產品
-router.post('/products', productController.create);
-//刪除單個產品
-router.delete('/products/:id', productController.remove);
-//刪除所有產品
-router.delete("/products/", productController.deleteAll);*/
 module.exports = router;

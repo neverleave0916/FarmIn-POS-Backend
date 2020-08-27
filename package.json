@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server.js",
-    "sequelize-automate": "sequelize-automate -t js -h neverleave0916.com -d test2 -u neverleave0916 -p Neverleave0920. -P 3307  -e mysql -o models2",
-    "sequelize-auto":"sequelize-auto -h neverleave0916.com -d test2 -u neverleave0916 -x Neverleave0920. -p 3307  --dialect mysql -o './app/models'"
+    "sequelize-automate": "sequelize-automate -t js -h neverleave0916.com -d farmin -u neverleave0916 -p Neverleave0920. -P 3307  -e mysql -o models2",
+    "sequelize-auto": "sequelize-auto -h neverleave0916.com -d farmin -u neverleave0916 -x Neverleave0920. -p 3307  --dialect mysql -o './app/models'"
   },
   "keywords": [
     "nodejs",

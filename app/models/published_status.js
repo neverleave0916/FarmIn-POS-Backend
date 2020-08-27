@@ -10,12 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     'published_status_title': {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'published_status_desc': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

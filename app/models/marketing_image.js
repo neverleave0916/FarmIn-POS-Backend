@@ -12,17 +12,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     'marketing_image_desc': {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'marketing_image_data': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'marketing_image_create_datetime': {
+    'marketing_image_create_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

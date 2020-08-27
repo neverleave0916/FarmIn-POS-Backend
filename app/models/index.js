@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -14,7 +13,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   port: dbConfig.port,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
+  operatorsAliases: 0,
 
   logQueryParameters: true,
   pool: {
@@ -23,9 +22,22 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
   },
-  define: {
-    timestamps: false
+  define:{
+    //https://sequelize.org/v5/manual/models-definition.html#configuration
+    timestamps: true,
+    createdAt: false,
+    updatedAt: false,
+    deletedAt: 'deleted_at',
+    paranoid:true
   },
+  dialectOptions: {
+    useUTC: false, //for reading from database
+    dateStrings: true,
+    typeCast: true,
+    timezone: 'Etc/GMT+8'
+  },
+  syncOnAssociation: false,
+  timezone: '+08:00' //for writing to database
 });
 
 
@@ -55,14 +67,11 @@ fs
   /** 類陣列物件-隨機下標
       var anObj = { 100: 'a', 2: 'b', 7: 'c' };
       console.log(Object.keys(anObj)); // console: ['2', '7', '100']
-  
+  */
   Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
       db[modelName].associate(db);
     }
-<<<<<<< Updated upstream
-  });*/
-=======
   });
 
   //採收
@@ -103,28 +112,26 @@ fs
 
 
 
-  //供應商
-  db.supplier.belongsToMany(db.product, {
-    through: db.supplier_participate_product,
-    foreignKey: "supplier_id",
-  });
-  db.product.belongsToMany(db.supplier, {
-    through: db.supplier_participate_product,
-    foreignKey: "product_id",
-  });
+    //採收
+    db.supplier.belongsToMany(db.product, {
+      through: db.supplier_participate_product,
+      foreignKey: "supplier_id",
+    });
+    db.product.belongsToMany(db.supplier, {
+      through: db.supplier_participate_product,
+      foreignKey: "product_id",
+    });
 
-  //會員類別
-  db.member.belongsToMany(db.member_category, {
-    through: db.member_participate_member_category,
-    foreignKey: "member_id",
-  });
-  db.member_category.belongsToMany(db.member, {
-    through: db.member_participate_member_category,
-    foreignKey: "member_category_id",
-  });
+    db.member.belongsToMany(db.member_category, {
+      through: db.member_participate_member_category,
+      foreignKey: "member_id",
+    });
+    db.member_category.belongsToMany(db.member, {
+      through: db.member_participate_member_category,
+      foreignKey: "member_category_id",
+    });
 
 
->>>>>>> Stashed changes
 
 
 

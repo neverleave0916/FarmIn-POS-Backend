@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'product_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'product',
@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'product_image_data': {
       type: "LONGBLOB",
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

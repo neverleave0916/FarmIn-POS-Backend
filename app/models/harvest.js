@@ -10,16 +10,16 @@ module.exports = function(sequelize, DataTypes) {
     },
     'user_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'user',
         key: 'user_id'
       }
     },
-    'harvest_date': {
+    'harvest_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

@@ -3,34 +3,69 @@ const Supplier = db.supplier;
 const Op = db.Sequelize.Op;
 const supplierController = {
 
+    //新增供應商
     create(req, res){
-      // Validate request
-      if (!req.body.supplier_id) {
-        res.status(400).send({
-          message: "Content can not be empty!"
+    if (!req.body.supplier_id) {    
+    res.status(400).send({
+        message: "supplier_id can not be empty!"
+    });
+    return;
+    }
+    Supplier.create(req.body)
+    .then(data=>{
+        for(let key in req.body.products){
+            let amount = req.body.products[key].amount  //supplier_participate_product_amount
+            let pd = req.body.products[key].product_id
+            data.addProducts([pd],{ through:{
+            supplier_participate_product_amount:amount
+            }});
+        }
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+        message:
+            err.message || "Some error occurred while creating the supplier."
         });
-        return;
-      }
-    
-      // Create a Tutorial
-      const supplier = {
-        "supplier_id": req.body.supplier_id,
-        "supplier_name": req.body.supplier_name,
-        "supplier_phone": req.body.supplier_phone,
-        "supplier_address": req.body.supplier_address,
-        "supplier_disc": req.body.supplier_description,
-      };
-    
-      // Save Tutorial in the database
-      Supplier.create(supplier)
+    });
+    },
+  
+    //取得所有供應商(含供應產品)
+    getAll(req, res) {
+        Supplier.findAll({
+        include: [{
+            all: true
+        }]
+        })
         .then(data => {
-          console.log(data)
-          res.send(data);
+        res.send(data);
         })
         .catch(err => {
-          res.status(500).send({
-          message: "Error getOne with id=" + id
-          });
+        res.status(500).send({
+            message: "Error getAll"
+        });
+        });
+
+    },
+
+    //取得單筆供應商(含產品)
+    getOne(req, res){
+        const id = req.params.id;
+        
+        Supplier.findByPk(id,{
+            //include: [{model:Harvest_product}],
+            include: [db.product]
+            // include: [{
+            //   all: true
+            // }]
+        })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+            message: "Error getOne with id=" + id
+            });
         });
     },
 
@@ -43,34 +78,59 @@ const supplierController = {
           res.send(data);})
         .catch(err => {
           res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the Tutorial."
+            message: "Error getMaxID"
           });
         });
     },
-  
-  
-    findAll(req, res) {
-      const title = req.query.title;
-      var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+    //更新供應商(含產品)
+    update(req, res){
+        const id = req.params.id;
     
-      Supplier.findAll({ where: condition })
+        Supplier.findByPk(id,{
+          include: [db.product]
+        })
         .then(data => {
-          res.send(data);
-        }); 
-    },
-  
-    // Find a single Tutorial with an id
-    findOne(req, res){
-      const id = req.params.id;
+          data.update(req.body, {
+            where: { supplier_id: req.body.supplier_id }
+          });
     
-      Supplier.findByPk(id)
-        .then(data => {
-          res.send(data);
+          data.setProducts([],{
+            force: true
+          })
+          .then(num=>{
+            //let tmp=0        
+            for(let key in req.body.products){
+              let amount = req.body.products[key].amount
+              let pd = req.body.products[key].product_id
+              data.addProducts([pd],{ through:{
+                supplier_participate_product_amount:amount
+              }})
+              //.then(del=>{tmp=del});
+            }
+            //res.send(tmp)
+            //if(num>=1 || tmp>=1){
+              //res.send(num)
+              res.send({
+                message: "供應商更新成功"
+              });
+            // }else{
+            //   res.status(500).send({
+            //     message: `Cannot update 交易紀錄` + tmp
+            //   });
+            // }
+              
+          })
+          .catch(err => {
+            res.status(500).send({
+              message: "Error getOne with id=" + id
+            });
+          });
+    
         })
         .catch(err => {
           res.status(500).send({
-            message: "Error retrieving Tutorial with id=" + id
+            message: "Error getOne with id=" + id
           });
         });
       },
@@ -82,8 +142,8 @@ const supplierController = {
         include: [db.product]
         })
         .then(data => {
-          data.setProducts([],)
-          .then(pd=>{
+        data.setProducts([],)
+        .then(pd=>{
             data.destroy()
             .then(num=>{
             if(num){

@@ -10,12 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     'member_category_name': {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'member_category_desc': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

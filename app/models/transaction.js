@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'member_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'member',
@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'transaction_src_id': {
       type: DataTypes.CHAR(6),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'transaction_src',
@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'transaction_status_id': {
       type: DataTypes.CHAR(7),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'transaction_status',
@@ -37,46 +37,46 @@ module.exports = function(sequelize, DataTypes) {
     },
     'payment_type_id': {
       type: DataTypes.CHAR(4),
-      allowNull: false,
+      allowNull: true,
       comment: "null",
       references: {
         model: 'payment_type',
         key: 'payment_type_id'
       }
     },
-    'transaction_create_time': {
+    'transaction_create_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_subtotal': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_discount': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_total': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_paid': {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
-    'transaction_pay_datetime': {
+    'transaction_pay_dt': {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_remark': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

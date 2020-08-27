@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     'dispose_participate_product_amount': {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {

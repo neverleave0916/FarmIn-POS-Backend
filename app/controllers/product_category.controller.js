@@ -35,19 +35,6 @@ const product_categoryController = {
           res.send(data);
         }); 
     },
-
-    getMaxID(req, res) {
-      Product_category.max('product_category_id',{
-        paranoid: false
-      })
-      .then(data => {
-        res.send(data);})
-      .catch(err => {
-        res.status(500).send({
-          message: "Error getMaxID"
-        });
-      });
-    },
   
     //:ID
     getOne(req, res){
@@ -70,51 +57,49 @@ const product_categoryController = {
       Product_category.update(req.body, {
         where: { product_category_id: id }
       })
-      .catch(err => {
-        console.log(req.body)
-        console.log(err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Tutorial."
+        .then(num => {
+          if (num == 1) {
+            res.send({
+              message: "產品類別更新成功"
+            });
+          } else {
+            res.send({
+              message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: "Error updating Tutorial with id=" + id
+          });
         });
-      });
-  },
+    },
 
-  findAll(req, res) {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-      
-    Product_category.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      }); 
-  },
 
-  findOne(req, res){
+  delete(req, res){
     const id = req.params.id;
-      
-    Product_category.findByPk(id)
-      .then(data => {
-        res.send(data);
+  
+    Product_category.destroy({
+      where: { product_category_id: id }
+    })
+      .then(num => {
+        if (num == 1) {
+          res.send({
+            message: "Tutorial was deleted successfully!"
+          });
+        } else {
+          res.send({
+            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+          });
+        }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
+          message: "Could not delete Tutorial with id=" + id
         });
       });
-  },
+  }
 
-  getBigID(req, res) {
-    Product_category.findOne({ order:[['product_category_id', 'DESC']], limit:1})
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
-        });
-      });
-  },
-}
+  };
 
 module.exports = product_categoryController;

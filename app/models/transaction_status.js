@@ -10,12 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     'transaction_status_name': {
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     },
     'transaction_status_desc': {
       type: DataTypes.STRING(256),
-      allowNull: false,
+      allowNull: true,
       comment: "null"
     }
   }, {
