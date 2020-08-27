@@ -3,20 +3,6 @@ const Product_category = db.product_category;
 const Op = db.Sequelize.Op;
 const product_categoryController = {
 
-<<<<<<< Updated upstream
-  create(req, res){
-    console.log(req.body.product_category_id)
-    if (!req.body.product_category_id) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
-    }
-
-    Product_category.create(req.body)
-      .then(data => {
-        res.send(data);
-=======
     create(req, res){
       // Validate request
       if (!req.body.product_category_id) {
@@ -83,7 +69,6 @@ const product_categoryController = {
     
       Product_category.update(req.body, {
         where: { product_category_id: id }
->>>>>>> Stashed changes
       })
       .catch(err => {
         console.log(req.body)

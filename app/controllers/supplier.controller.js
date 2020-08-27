@@ -24,11 +24,6 @@ const supplierController = {
       // Save Tutorial in the database
       Supplier.create(supplier)
         .then(data => {
-<<<<<<< Updated upstream
-          res.send(data);
-        })
-        .catch(err => {
-=======
           console.log(data)
           res.send(data);
         })
@@ -47,7 +42,6 @@ const supplierController = {
         .then(data => {
           res.send(data);})
         .catch(err => {
->>>>>>> Stashed changes
           res.status(500).send({
             message:
               err.message || "Some error occurred while creating the Tutorial."
@@ -79,10 +73,6 @@ const supplierController = {
             message: "Error retrieving Tutorial with id=" + id
           });
         });
-<<<<<<< Updated upstream
-    }
-    
-=======
       },
 
     //刪除單一筆紀錄(含產品)
@@ -122,7 +112,6 @@ const supplierController = {
         });
     },
 
->>>>>>> Stashed changes
   };
 
 module.exports = supplierController;
