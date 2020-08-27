@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 const product_categoryController = {
 
   create(req, res){
-
+    console.log(req.body.product_category_id)
     if (!req.body.product_category_id) {
       res.status(400).send({
         message: "Content can not be empty!"
@@ -17,6 +17,8 @@ const product_categoryController = {
         res.send(data);
       })
       .catch(err => {
+        console.log(req.body)
+        console.log(err)
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the Tutorial."
@@ -46,7 +48,19 @@ const product_categoryController = {
           message: "Error retrieving Tutorial with id=" + id
         });
       });
-  }
+  },
+
+  getBigID(req, res) {
+    Product_category.findOne({ order:[['product_category_id', 'DESC']], limit:1})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving Tutorial with id=" + id
+        });
+      });
+  },
 }
 
 module.exports = product_categoryController;

@@ -26,6 +26,8 @@ const product_categoryController = require('../../controllers/product_category.c
   // Retrieve a single Tutorial with id
   router.get("/:id", product_categoryController.findOne);
 
+  router.get("/BigID/BigID", product_categoryController.getBigID);
+
   // router.put('/:id', product_categoryController.update);
 
   // router.delete('/:id', product_categoryController.delete);
