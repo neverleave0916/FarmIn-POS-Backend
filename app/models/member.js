@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "null"
     },
-    'memebr_email': {
+    'member_email': {
       type: DataTypes.STRING(100),
       allowNull: false,
       comment: "null"

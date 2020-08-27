@@ -60,7 +60,71 @@ fs
     if (db[modelName].associate) {
       db[modelName].associate(db);
     }
+<<<<<<< Updated upstream
   });*/
+=======
+  });
+
+  //採收
+  db.harvest.belongsToMany(db.product, {
+    through: db.harvest_participate_product,
+    foreignKey: "harvest_id",
+  });
+  db.product.belongsToMany(db.harvest, {
+    through: db.harvest_participate_product,
+    foreignKey: "product_id",
+  });
+
+  //交易
+  db.transaction.belongsTo(db.transaction_src,{
+    through: db.transaction_src,
+    foreignKey: "transaction_src_id"
+  });
+  db.transaction.belongsTo(db.transaction_status,{
+    through: db.transaction_status,
+    foreignKey: "transaction_status_id"
+  });
+  db.transaction.belongsTo(db.member,{
+    through: db.member,
+    foreignKey: "member_id"
+  });
+  db.transaction.belongsTo(db.payment_type,{
+    through: db.payment_type,
+    foreignKey: "payment_type_id"
+  });
+  db.transaction.belongsToMany(db.product, {
+    through: db.transaction_participate_product,
+    foreignKey: "transaction_id",
+  });
+  db.product.belongsToMany(db.transaction, {
+    through: db.transaction_participate_product,
+    foreignKey: "product_id",
+  });
+
+
+
+  //供應商
+  db.supplier.belongsToMany(db.product, {
+    through: db.supplier_participate_product,
+    foreignKey: "supplier_id",
+  });
+  db.product.belongsToMany(db.supplier, {
+    through: db.supplier_participate_product,
+    foreignKey: "product_id",
+  });
+
+  //會員類別
+  db.member.belongsToMany(db.member_category, {
+    through: db.member_participate_member_category,
+    foreignKey: "member_id",
+  });
+  db.member_category.belongsToMany(db.member, {
+    through: db.member_participate_member_category,
+    foreignKey: "member_category_id",
+  });
+
+
+>>>>>>> Stashed changes
 
 
 
