@@ -40,6 +40,7 @@ const member_categoryController = {
         res.send(data);
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message: "Error getAll"
         });
@@ -85,7 +86,7 @@ const member_categoryController = {
   //更新會員類別(含)
   update(req, res){
     const id = req.params.id;
-    console.log(req.body)
+    console.log(req.body.members)
     Member_category.findByPk(id,{
       include: [db.member]
     })

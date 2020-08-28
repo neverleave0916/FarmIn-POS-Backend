@@ -122,6 +122,7 @@ const supplierController = {
               
           })
           .catch(err => {
+            consolr.log(err)
             res.status(500).send({
               message: "Error getOne with id=" + id
             });
@@ -129,6 +130,7 @@ const supplierController = {
     
         })
         .catch(err => {
+          consolr.log(err)
           res.status(500).send({
             message: "Error getOne with id=" + id
           });
