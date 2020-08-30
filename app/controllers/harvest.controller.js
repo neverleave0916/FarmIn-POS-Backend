@@ -20,6 +20,7 @@ const harvestController = {
 
   //新增產品採收紀錄
   create(req, res){
+    console.log(req.body)
     let status=0,error=""
     if (!req.body.harvest_id) {    
       res.status(400).send({
@@ -31,7 +32,7 @@ const harvestController = {
     const HarvestData = {
       "harvest_id": req.body.harvest_id,
       "user_id": req.body.user_id,
-      "harvest_datetime": req.body.harvest_dt
+      "harvest_dt": req.body.harvest_dt
     }
 
     //新增採收紀錄
@@ -47,7 +48,6 @@ const harvestController = {
             "product_id": obj.product_id,
             "harvest_participate_product_amount": obj.amount
           }
-    
           Harvest_product.create(Harvest_ProductData)
             .then(data => {
               //res.send(data);
@@ -58,6 +58,7 @@ const harvestController = {
               }
             })
             .catch(err => {
+              console.log(err)
               res.status(500).send({
                 message:err.message
               });
@@ -65,11 +66,9 @@ const harvestController = {
               //return;          
             });  
         });
-
-
-
       })
       .catch(err => {
+        console.log(err)
         res.status(500).send({
           message:err.message
         });

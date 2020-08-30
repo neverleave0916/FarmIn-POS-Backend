@@ -84,6 +84,36 @@ fs
     foreignKey: "product_id",
   });
 
+  //進貨
+  db.purchase.belongsToMany(db.product, {
+    through: db.purchase_participate_product,
+    foreignKey: "purchase_id",
+  });
+  db.product.belongsToMany(db.purchase, {
+    through: db.purchase_participate_product,
+    foreignKey: "product_id",
+  });
+
+  //報廢
+  db.dispose.belongsToMany(db.product, {
+    through: db.dispose_participate_product,
+    foreignKey: "dispose_id",
+  });
+  db.product.belongsToMany(db.dispose, {
+    through: db.dispose_participate_product,
+    foreignKey: "product_id",
+  });
+
+  //調整
+  db.adjust.belongsToMany(db.product, {
+    through: db.adjust_participate_product,
+    foreignKey: "adjust_id",
+  });
+  db.product.belongsToMany(db.adjust, {
+    through: db.adjust_participate_product,
+    foreignKey: "product_id",
+  });
+
   //交易
   db.transaction.belongsTo(db.transaction_src,{
     through: db.transaction_src,
@@ -130,11 +160,6 @@ fs
       through: db.member_participate_member_category,
       foreignKey: "member_category_id",
     });
-
-
-
-
-
 
 
   db.Sequelize = Sequelize;

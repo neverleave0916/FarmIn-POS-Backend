@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'user_id'
       }
     },
-    'dispose_': {
+    'dispose_dt': {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "null"
