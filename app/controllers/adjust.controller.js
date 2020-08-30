@@ -21,7 +21,6 @@ const adjustController = {
             adjust_participate_product_amount:amount,
         }});
       }
-      console.log(data)
       res.send(data);
     })
     .catch(err => {
@@ -78,7 +77,13 @@ const adjustController = {
       paranoid: false
       })
       .then(data => {
-        res.send(data);})
+        console.log(data)
+        if(data) {
+          res.send(data);
+        }else{
+          data = null
+          res.send(data);
+        }})
       .catch(err => {
         res.status(500).send({
           message: "Error getMaxID"

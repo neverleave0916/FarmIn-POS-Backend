@@ -78,7 +78,12 @@ const disposeController = {
       paranoid: false
       })
       .then(data => {
-        res.send(data);})
+        if(data) {
+          res.send(data);
+        }else{
+          data = null
+          res.send(data);
+        }})
       .catch(err => {
         res.status(500).send({
           message: "Error getMaxID"
