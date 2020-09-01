@@ -35,6 +35,21 @@ const product_categoryController = {
           res.send(data);
         }); 
     },
+
+    getMaxID(req, res) {
+      Product_category.max('product_category_id',{
+        paranoid: false
+      })
+      .then(data => {
+        console.log(data)
+        res.send(data);})
+      .catch(err => {
+        console.log(err)
+        res.status(500).send({
+          message: "Error getMaxID"
+        });
+      });
+    },
   
     //:ID
     getOne(req, res){

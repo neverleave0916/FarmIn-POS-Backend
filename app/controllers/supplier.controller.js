@@ -32,20 +32,19 @@ const supplierController = {
   
     //取得所有供應商(含供應產品)
     getAll(req, res) {
-        Supplier.findAll({
+      Supplier.findAll({
         include: [{
-            all: true
+          all: true
         }]
-        })
-        .then(data => {
+      })
+      .then(data => {
         res.send(data);
-        })
-        .catch(err => {
+      })
+      .catch(err => {
         res.status(500).send({
-            message: "Error getAll"
+          message: "Error getAll"
         });
-        });
-
+      });
     },
 
     //取得單筆供應商(含產品)

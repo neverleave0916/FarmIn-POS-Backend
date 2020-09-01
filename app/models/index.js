@@ -104,6 +104,16 @@ fs
     foreignKey: "product_id",
   });
 
+  //種植
+  db.plant.belongsToMany(db.product, {
+    through: db.plant_participate_product,
+    foreignKey: "plant_id",
+  });
+  db.product.belongsToMany(db.plant, {
+    through: db.plant_participate_product,
+    foreignKey: "product_id",
+  });
+
   //調整
   db.adjust.belongsToMany(db.product, {
     through: db.adjust_participate_product,
