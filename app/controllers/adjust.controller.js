@@ -17,8 +17,10 @@ const adjustController = {
       for(let key in req.body.product){
         let pi = req.body.product[key].product_id
         let amount = req.body.product[key].amount
+        let choice = req.body.product[key].choice
         data.addProducts([pi],{ through:{
-            adjust_participate_product_amount:amount,
+          adjust_participate_product_amount:amount,
+          adjust_choice:choice,
         }});
       }
       res.send(data);
@@ -111,8 +113,10 @@ const adjustController = {
           for(let key in req.body.product){
             let pi = req.body.product[key].product_id
             let amount = req.body.product[key].amount
+            let choice = req.body.product[key].choice
             data.addProducts([pi],{ through:{
-                adjust_participate_product_amount:amount,
+              adjust_participate_product_amount:amount,
+              adjust_choice:choice,
             }});
           }
             res.send({
