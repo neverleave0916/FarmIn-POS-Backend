@@ -35,5 +35,8 @@
     "description": "API 文件",
     "title": "測試的Api文件",
     "url": "https://127.0.0.1:8080/api"
+  },
+  "devDependencies": {
+    "prettier": "2.1.0"
   }
 }
