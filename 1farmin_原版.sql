@@ -6,7 +6,7 @@ CREATE TABLE member
   member_gender TINYINT(1) NOT NULL,
   member_birthday DATE NOT NULL,
   member_phone CHAR(15) NOT NULL,
-  memebr_email VARCHAR(100) NOT NULL,
+  member_email VARCHAR(100) NOT NULL,
   member_address VARCHAR(100) NOT NULL,
   member_balance FLOAT NOT NULL,
   member_remark VARCHAR(256) NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE dispose
 (
   dispose_id CHAR(16) NOT NULL,
   user_id CHAR(6) NOT NULL,
-  dispose_datetime DATETIME NOT NULL,
+  dispose_dt DATETIME NOT NULL,
   PRIMARY KEY (dispose_id),
   FOREIGN KEY (user_id) REFERENCES user(user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

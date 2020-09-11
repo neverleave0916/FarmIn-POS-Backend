@@ -109,7 +109,7 @@ CREATE TABLE `deposit` (
 CREATE TABLE `dispose` (
   `dispose_id` char(16) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'null',
   `user_id` char(6) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null',
-  `dispose_` datetime DEFAULT NULL COMMENT 'null',
+  `dispose_dt` datetime DEFAULT NULL COMMENT 'null',
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -193,7 +193,7 @@ CREATE TABLE `member` (
   `member_gender` int(1) DEFAULT NULL COMMENT 'null',
   `member_birthday` date DEFAULT NULL COMMENT 'null',
   `member_phone` char(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null',
-  `memebr_email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null',
+  `member_email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null',
   `member_address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null',
   `member_balance` float DEFAULT NULL COMMENT 'null',
   `member_remark` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null',
