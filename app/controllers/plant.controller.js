@@ -94,7 +94,7 @@ const plantController = {
   //更新進貨產品(含)
   update(req, res){
     const id = req.params.id;
-    console.log(req.body)
+    console.log(req.body.product)
     Plant.findByPk(id,{
       include: [db.product]
     })

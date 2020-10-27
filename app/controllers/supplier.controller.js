@@ -13,14 +13,12 @@ const supplierController = {
     }
     Supplier.create(req.body)
     .then(data=>{
-        if(req.body.products) {
-          for(let key in req.body.products){
+        for(let key in req.body.products){
             let amount = req.body.products[key].amount  //supplier_participate_product_amount
             let pd = req.body.products[key].product_id
             data.addProducts([pd],{ through:{
             supplier_participate_product_amount:amount
             }});
-          }
         }
         res.send(data);
     })

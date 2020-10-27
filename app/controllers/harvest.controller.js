@@ -162,7 +162,7 @@ const harvestController = {
 //更新採收紀錄(含產品)
   update(req, res){
     const id = req.params.id;
-    console.log(req.body)
+
     Harvest.findByPk(id,{
       include: [db.product]
     })

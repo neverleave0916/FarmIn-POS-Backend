@@ -7,7 +7,11 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: '*'
+  // origin: [
+  //   "http://localhost:8081",
+  //   "http://neverleave0916.com:34566"
+  // ]
 };
 
 /** 使用中間件 */
@@ -38,7 +42,7 @@ const apiRouter = require("./app/routes/api");
 app.use('/api',apiRouter);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

@@ -170,17 +170,6 @@ fs
       through: db.member_participate_member_category,
       foreignKey: "member_category_id",
     });
-    
-
-    //種植採收
-    db.plant.belongsToMany(db.harvest, {
-      through: db.plant_participate_harvest,
-      foreignKey: "plant_id",
-    });
-    db.harvest.belongsToMany(db.plant, {
-      through: db.plant_participate_harvest,
-      foreignKey: "harvest_id",
-    });
 
 
   db.Sequelize = Sequelize;

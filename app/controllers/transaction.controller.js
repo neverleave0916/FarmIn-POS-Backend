@@ -62,7 +62,6 @@ const transactionController = {
   //取得單筆交易紀錄(含產品)，/TX2020082000002
   getOne(req, res){
     const id = req.params.id;
-    
     Transaction.findByPk(id,{
       include: [{
         all: true
@@ -80,16 +79,28 @@ const transactionController = {
 
   //取得最後一筆交易紀錄ID
   getMaxID(req, res) {
-    Transaction.max('transaction_id',{
-      paranoid: false
+    Transaction.count()
+    .then(data=>{
+      if(data<=0){
+        res.send(data.toString()); //不能送number
+      }else{
+        Transaction.max('transaction_id',{
+          paranoid: false
+        })
+        .then(data => {
+          res.send(data);})
+        .catch(err => {
+          res.status(500).send({
+            message: "Error getMaxID"
+          });
+        });
+      }
+      
     })
-    .then(data => {
-      res.send(data);})
-    .catch(err => {
-      res.status(500).send({
-        message: "Error getMaxID"
-      });
-    });
+    .catch(err=>{
+      res.status(500).send({message: "Error getMaxID"})
+    })
+
   },
 
 // //更新採收紀錄(含產品)
