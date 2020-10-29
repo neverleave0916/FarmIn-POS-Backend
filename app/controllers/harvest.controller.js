@@ -20,8 +20,6 @@ const harvestController = {
 
   //新增產品採收紀錄
   create(req, res){
-    console.log(req.body)
-    let status=0,error=""
     if (!req.body.harvest_id) {    
       res.status(400).send({
         message: "harvest_id can not be empty!"
@@ -29,52 +27,29 @@ const harvestController = {
       return;
     }
 
-    const HarvestData = {
-      "harvest_id": req.body.harvest_id,
-      "user_id": req.body.user_id,
-      "harvest_dt": req.body.harvest_dt
-    }
-
     //新增採收紀錄
-    Harvest.create(HarvestData)
-      .then(data => {
-        //status=200
-        //res.send(data);
-
-        //一筆一筆新增採收產品
-        req.body.product.forEach(function(obj,index) {
-          const Harvest_ProductData = {
-            "harvest_id": req.body.harvest_id,
-            "product_id": obj.product_id,
-            "harvest_participate_product_amount": obj.amount
-          }
-          Harvest_product.create(Harvest_ProductData)
-            .then(data => {
-              //res.send(data);
-              if((index+1)>=req.body.product.length){
-                res.status(200).send({
-                  message:"新增成功"
-                  });
-              }
-            })
-            .catch(err => {
-              console.log(err)
-              res.status(500).send({
-                message:err.message
-              });
-              return;
-              //return;          
-            });  
-        });
-      })
-      .catch(err => {
-        console.log(err)
-        res.status(500).send({
-          message:err.message
-        });
-        return;     
+    Harvest.create(req.body)
+    .then(data=>{
+      for(let key in req.body.product){
+        let pi = req.body.product[key].product_id
+        let amount = req.body.product[key].amount
+        data.addProducts([pi],{ through:{
+            harvest_participate_product_amount:amount,
+        }});
+      }
+      for(let key in req.body.plants){
+        let pa = req.body.plants[key].plant_id
+        data.addPlants([pa]);
+      }
+      console.log(data)
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the supplier."
       });
-
+    });
   },
 
   //取得所有採收紀錄(含產品)，或單筆紀錄用/?harvest_id=HARR202008200001
@@ -127,14 +102,19 @@ const harvestController = {
   getMaxID(req, res) {
     Harvest.max('harvest_id',{
       paranoid: false
-    })
-    .then(data => {
-      res.send(data);})
-    .catch(err => {
-      res.status(500).send({
-        message: "Error getMaxID"
+      })
+      .then(data => {
+        if(data) {
+          res.send(data);
+        }else{
+          data = null
+          res.send(data);
+        }})
+      .catch(err => {
+        res.status(500).send({
+          message: "Error getMaxID"
+        });
       });
-    });
   },
 
 

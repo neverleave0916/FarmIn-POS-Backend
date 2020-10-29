@@ -21,6 +21,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'member_category',
         key: 'member_category_id'
       }
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'member_participate_member_category'

@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     'member_id': {
       type: DataTypes.CHAR(6),
       allowNull: true,
+      primaryKey: true,
       comment: "null",
       references: {
         model: 'member',
@@ -38,6 +39,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     'renew_cycle': {
       type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: "null"
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
       allowNull: true,
       comment: "null"
     }

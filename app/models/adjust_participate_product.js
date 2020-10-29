@@ -22,13 +22,18 @@ module.exports = function(sequelize, DataTypes) {
         key: 'product_id'
       }
     },
-    'adjust_choice' : {
+    'adjust_choice': {
       type: DataTypes.CHAR(6),
       allowNull: true,
       comment: "null"
     },
     'adjust_participate_product_amount': {
       type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: "null"
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
       allowNull: true,
       comment: "null"
     }

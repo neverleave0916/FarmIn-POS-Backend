@@ -21,6 +21,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'product',
         key: 'product_id'
       }
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'cart_participate_product'

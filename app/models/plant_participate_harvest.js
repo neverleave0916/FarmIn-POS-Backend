@@ -21,6 +21,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'harvest',
         key: 'harvest_id'
       }
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'plant_participate_harvest'

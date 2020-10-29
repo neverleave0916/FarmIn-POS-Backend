@@ -23,6 +23,11 @@ module.exports = function(sequelize, DataTypes) {
       type: "LONGBLOB",
       allowNull: true,
       comment: "null"
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'product_image'

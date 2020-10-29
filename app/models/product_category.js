@@ -36,6 +36,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'product_category',
         key: 'product_category_id'
       }
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'product_category'

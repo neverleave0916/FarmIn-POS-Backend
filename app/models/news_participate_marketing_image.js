@@ -21,6 +21,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'marketing_image',
         key: 'marketing_image_id'
       }
+    },
+    'deleted_at': {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: "null"
     }
   }, {
     tableName: 'news_participate_marketing_image'
